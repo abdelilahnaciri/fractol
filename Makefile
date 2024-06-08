@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/06/08 20:39:20 by abnaciri          #+#    #+#              #
+#    Updated: 2024/06/08 20:39:21 by abnaciri         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = fractol
 HEADER = fractol.h
 CFLAGS = -Wall -Wextra -Werror
@@ -14,7 +26,6 @@ SRC = coloring.c \
 	ft_strncmp.c \
 	utils.c \
 	utils2.c
-
 
 OBJ = $(SRC:.c=.o)
 all : $(NAME)

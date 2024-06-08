@@ -1,21 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol_maths.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/08 20:38:55 by abnaciri          #+#    #+#             */
+/*   Updated: 2024/06/08 20:43:08 by abnaciri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fractol.h"
 
 int	calc_julia(t_fractol *fractol, int max_it)
 {
 	fractol->c.real = fractol->julia_args.julia_x;
-	// printf("Real num: %f\n", fractol->c.real);
 	fractol->c.img = fractol->julia_args.julia_y;
-	// printf("Imaginary num: %f\n", fractol->c.img);
 	return (calc_iteration(fractol->pixel, fractol->c, max_it));
 }
 
 int	calc_mandelbrot(t_fractol *fractol, int max_it)
 {
 	fractol->c.real = 0;
-	// printf("Real num: %f\n", fractol->c.real);
 	fractol->c.img = 0;
-	// printf("Imaginary num: %f\n", fractol->c.img);
 	return (calc_iteration(fractol->c, fractol->pixel, max_it));
 }
 
@@ -38,5 +45,3 @@ int	calc_iteration(t_complex z, t_complex c, int max_it)
 	}
 	return (iterations);
 }
-
-

@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/08 20:39:15 by abnaciri          #+#    #+#             */
+/*   Updated: 2024/06/08 20:53:34 by abnaciri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fractol.h"
-void error_msg() {
-	ft_putstr_fd("Enter \"Mandelbrot\", or \"Julia\" + Cordinates\n", 1);
+
+void	error_msg(void)
+{
+	ft_putstr_fd("Enter \"Mandelbrot\", or \"Julia\" + Cordinates\n", 2);
 	exit(0);
 }
 
@@ -9,7 +22,7 @@ int	ft_close_win(t_fractol *fractol)
 {
 	mlx_destroy_image(fractol->mlx_con, fractol->image.img_ptr);
 	mlx_destroy_window(fractol->mlx_con, fractol->mlx_win);
-	exit(EXIT_FAILURE);
+	exit(1);
 }
 
 void	ft_init_win(t_fractol *fractol)
@@ -17,7 +30,8 @@ void	ft_init_win(t_fractol *fractol)
 	fractol->mlx_con = mlx_init();
 	if (!fractol->mlx_con)
 		exit(1);
-	fractol->mlx_win = mlx_new_window(fractol->mlx_con, HEIGHT, WIDTH, fractol->title);
+	fractol->mlx_win = mlx_new_window(fractol->mlx_con, HEIGHT,
+			WIDTH, fractol->title);
 	if (!fractol->mlx_win)
 		exit(1);
 	fractol->image.img_ptr = mlx_new_image(&fractol->image, HEIGHT, WIDTH);
@@ -38,16 +52,17 @@ int	main(int ac, char *av[])
 {
 	t_fractol	fractol;
 
-	if (ac == 2 || ac == 4) {
-		if (ac == 4 && !ft_strncmp(av[1], "Julia", 5)) {
+	if (ac == 2 || ac == 4)
+	{
+		if (ac == 4 && !ft_strncmp(av[1], "Julia", 5))
 			check_inputs(av, &fractol);
-		}
 		else if ((ac == 2 && ft_strncmp(av[1], "Mandelbrot", 10))
-		|| (ac == 5 && ft_strncmp(av[1], "Julia", 5)))
+			|| (ac == 5 && ft_strncmp(av[1], "Julia", 5)))
 			error_msg();
 		fractol.zoom = 1;
 		fractol.max_it = 100;
-	} else
+	}
+	else
 		error_msg();
 	fractol.title = av[1];
 	ft_init_win(&fractol);

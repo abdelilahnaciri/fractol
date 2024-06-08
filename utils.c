@@ -1,12 +1,22 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/08 20:39:24 by abnaciri          #+#    #+#             */
+/*   Updated: 2024/06/08 21:02:43 by abnaciri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fractol.h"
 
 int	handle_max_int(char *str)
 {
 	int	nb;
-	int		sign;
-	int		i;
+	int	sign;
+	int	i;
 
 	i = 0;
 	sign = 1;
@@ -28,34 +38,42 @@ int	handle_max_int(char *str)
 	return (1);
 }
 
+int	check_nbr(char *str, int i, int dot)
+{
+	if (str[i] <= 32 || str[0] == '.')
+		return (0);
+	else if (str[i] >= '0' && str[i] <= '9')
+	{
+		if (!(str[i + 1] >= '0' && str[i + 1] <= '9')
+			&& str[i + 1] != '\0' && str[i + 1] != '.')
+			return (0);
+	}
+	else if (str[i] == '+' || str[i] == '-')
+	{
+		if (!(str[i + 1] >= '0' && str[i + 1] <= '9'))
+			return (0);
+	}
+	else if (str[i] == '.')
+	{
+		dot++;
+		if (!(str[i + 1] >= '0' && str[i + 1] <= '9') || str[i + 1] == '\0')
+			return (0);
+	}
+	else
+		return (0);
+}
+
 int	is_number(char *str)
 {
 	int	i;
-    int dot;
+	int	dot;
 
-    i = 0;
-    dot = 0;
-    while (str[i])
-    {
-		if (str[i] <= 32 || str[0] == '.')
+	i = 0;
+	dot = 0;
+	while (str[i])
+	{
+		if (!check_nbr(str, i, dot))
 			return (0);
-		else if (str[i] >= '0' && str[i] <= '9')
-		{
-			if (!(str[i + 1] >= '0' && str[i + 1] <= '9') && str[i + 1] != '\0' && str[i + 1] != '.')
-                return (0);
-        }
-		else if (str[i] == '+' || str[i] == '-')
-		{
-			if (!(str[i + 1] >= '0' && str[i + 1] <= '9'))
-				return (0);
-		}
-        else if (str[i] == '.') {
-            dot++;
-            if (!(str[i + 1] >= '0' && str[i + 1] <= '9') || str[i + 1] == '\0')
-                return (0);
-        }
-		else
-            return (0);
 		i++;
 	}
 	if (dot > 1 || !handle_max_int(str))
@@ -69,14 +87,14 @@ void	check_inputs(char *argv[], t_fractol *fractol)
 	{
 		fractol->julia_args.julia_x = ft_atof(argv[2]);
 		fractol->julia_args.julia_y = ft_atof(argv[3]);
-		if ((fractol->julia_args.julia_x < -2 || fractol->julia_args.julia_y < -2)
-		|| (fractol->julia_args.julia_x > 2 || fractol->julia_args.julia_y > 2)) {
-			printf("Cordinates should be btween -2 and 2\n");
+		if ((fractol->julia_args.julia_x < -2
+				|| fractol->julia_args.julia_y < -2)
+			|| (fractol->julia_args.julia_x > 2
+				|| fractol->julia_args.julia_y > 2))
+		{
+			ft_putstr_fd("Cordinates should be btween -2 and 2\n", 2);
 			exit(0);
 		}
-		printf("good numbers\n");
-		printf("num1 : %f\n", fractol->julia_args.julia_x);
-		printf("num2 : %f\n", fractol->julia_args.julia_y);
 	}
 	else
 	{
