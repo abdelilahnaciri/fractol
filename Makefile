@@ -9,7 +9,7 @@ SRC = coloring.c \
 	drawing.c \
 	hooks.c \
 	main.c \
-	rendering.c \
+	fractol_maths.c \
 	libft.c \
 	ft_strncmp.c \
 	utils.c \
