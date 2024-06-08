@@ -1,20 +1,18 @@
-
-
 #include "fractol.h"
 
-int	ft_determine_color(int iterations, int max_iterations)
+int	set_color(int iterations, int max_it)
 {
 	int	red;
 	int	green;
 	int	blue;
 
-	if (iterations == max_iterations)
+	if (iterations == max_it)
 		return (0x000000);
 	else
 	{
 		red = (iterations * 5) % 255;
-		green = (iterations * 3) % 255;
-		blue = (iterations * 7) % 255;
-		return ((red << 16) | (green << 8) | blue);
+		green = (iterations * 5) % 255;
+		blue = (iterations * 2) % 255;
+		return ((red << 8) | (green << 8) | blue);
 	}
 }

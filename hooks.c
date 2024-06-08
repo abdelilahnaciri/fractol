@@ -1,29 +1,27 @@
-
-
 #include "fractol.h"
 
-int	ft_handle_keypress(int key, t_fractol *fractol)
+int	esc_key_press(int key, t_fractol *fractol)
 {
 	if (key == KEY_ESC)
-		ft_close_window(fractol);
+		ft_close_win(fractol);
 	return (0);
 }
 
-int	ft_handle_mouse(int button, int x, int y, t_fractol *fractol)
+int	mouse_scroll(int scroll, int x, int y, t_fractol *fractol)
 {
 	(void)x;
 	(void)y;
-	if (button == ZOOM_IN_KEY)
+	if (scroll == SCROLL_IN_KEY)
 		fractol->zoom *= 1.1;
-	else if (button == ZOOM_OUT_KEY)
+	else if (scroll == SCROLL_OUT_KEY)
 		fractol->zoom /= 1.1;
 	return (0);
 }
 
-void	ft_setup_hooks(t_fractol *fractol)
+void	set_hooks(t_fractol *fractol)
 {
-	mlx_key_hook(fractol->mlx_window, ft_handle_keypress, fractol);
-	mlx_mouse_hook(fractol->mlx_window, ft_handle_mouse, fractol);
-	mlx_hook(fractol->mlx_window, 17, 0, ft_close_window, fractol);
-	mlx_loop_hook(fractol->mlx_con, ft_render_fractal, fractol);
+	mlx_key_hook(fractol->mlx_win, esc_key_press, fractol);
+	mlx_mouse_hook(fractol->mlx_win, mouse_scroll, fractol);
+	mlx_hook(fractol->mlx_win, 17, 0, ft_close_win, fractol);
+	mlx_loop_hook(fractol->mlx_con, ft_fractol, fractol);
 }

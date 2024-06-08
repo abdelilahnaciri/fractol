@@ -1,61 +1,42 @@
 
 #include "fractol.h"
 
-int	ft_calculate_julia(t_fractol *fractol, int max_iterations)
+int	calc_julia(t_fractol *fractol, int max_it)
 {
-	fractol->cst.real = fractol->fractal_config.julia_x;
-	// printf("Real num: %f\n", fractol->cst.real);
-	fractol->cst.imaginary = fractol->fractal_config.julia_y;
-	// printf("Imaginary num: %f\n", fractol->cst.imaginary);
-	return (ft_iterate_fractal(fractol->pixel, fractol->cst, max_iterations));
+	fractol->c.real = fractol->julia_args.julia_x;
+	// printf("Real num: %f\n", fractol->c.real);
+	fractol->c.img = fractol->julia_args.julia_y;
+	// printf("Imaginary num: %f\n", fractol->c.img);
+	return (calc_iteration(fractol->pixel, fractol->c, max_it));
 }
 
-int	ft_calculate_mandelbrot(t_fractol *fractol, int max_iterations)
+int	calc_mandelbrot(t_fractol *fractol, int max_it)
 {
-	fractol->cst.real = 0;
-	// printf("Real num: %f\n", fractol->cst.real);
-	fractol->cst.imaginary = 0;
-	// printf("Imaginary num: %f\n", fractol->cst.imaginary);
-	return (ft_iterate_fractal(fractol->cst, fractol->pixel, max_iterations));
+	fractol->c.real = 0;
+	// printf("Real num: %f\n", fractol->c.real);
+	fractol->c.img = 0;
+	// printf("Imaginary num: %f\n", fractol->c.img);
+	return (calc_iteration(fractol->c, fractol->pixel, max_it));
 }
 
-int	ft_iterate_fractal(t_complex z, t_complex c, int max_iterations)
+int	calc_iteration(t_complex z, t_complex c, int max_it)
 {
 	int		iterations;
 	double	real;
-	double	imaginary;
+	double	img;
 
 	iterations = 0;
-	while (iterations < max_iterations)
+	while (iterations < max_it)
 	{
-		real = z.real * z.real - z.imaginary * z.imaginary + c.real;
-		imaginary = 2 * z.real * z.imaginary + c.imaginary;
+		real = z.real * z.real - z.img * z.img + c.real;
+		img = 2 * z.real * z.img + c.img;
 		z.real = real;
-		z.imaginary = imaginary;
-		if (z.real * z.real + z.imaginary * z.imaginary > 4)
+		z.img = img;
+		if (z.real * z.real + z.img * z.img > 4)
 			break ;
 		iterations++;
 	}
 	return (iterations);
 }
 
-int	ft_render_fractal(t_fractol *fractol)
-{
-	int	x;
-	int	y;
 
-	y = 0;
-	while (y < WIDTH)
-	{
-		x = 0;
-		while (x < HEIGHT)
-		{
-			ft_draw_fractal_pixel(fractol, x, y);
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(fractol->mlx_con, fractol->mlx_window,
-		fractol->image.img_ptr, 0, 0);
-	return (0);
-}

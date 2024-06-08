@@ -16,21 +16,15 @@
 
 // keys
 # define KEY_ESC 53
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
-# define KEY_UP 126
-# define KEY_DOWN 125
+
 // Mouse
-# define MOUSE_LEFT_CLICK 1
-# define MOUSE_RIGHT_CLICK 2
-# define MOUSE_MIDDLE_CLICK 3
-# define ZOOM_IN_KEY 4
-# define ZOOM_OUT_KEY 5
+# define SCROLL_IN_KEY 4
+# define SCROLL_OUT_KEY 5
 
 typedef struct s_complex
 {
 	double	real;
-	double	imaginary;
+	double	img;
 }	t_complex;
 
 typedef struct s_image
@@ -48,54 +42,53 @@ typedef struct s_point
 	int	y;
 }	t_point;
 
-typedef struct s_fractal_config
+typedef struct s_julia_args
 {
 	char	type;
 	double	julia_x;
 	double	julia_y;
-}	t_fractal_config;
+}	t_julia_args;
 
 typedef struct s_fractol
 {
 	// Window and image info
 	void				*mlx_con;
-	void				*mlx_window;
+	void				*mlx_win;
 	char 				*title;
 	t_image image;
 	// complex numbers
-	t_complex			cst;
+	t_complex			c;
 	t_complex			pixel;
 	// Fractal specific parameters
-	int					max_iterations;
+	int					max_it;
 	double				zoom;
 	t_point				offset;
-	// int					fractal_choice;
-	t_fractal_config	fractal_config;
+	t_julia_args	julia_args;
 }	t_fractol;
 
 
 // Graphics
 // void	ft_setup_window(t_fractol *fractol);
-void	ft_init_window(t_fractol *fractol);
-int		ft_close_window(t_fractol *fractol);
+void	ft_init_win(t_fractol *fractol);
+int		ft_close_win(t_fractol *fractol);
 
 // Coloring and Drawing
-int		ft_determine_color(int iterations, int max_iterations);
+int		set_color(int iterations, int max_it);
 void	ft_put_pixel_to_image(t_fractol *fractol, int x, int y, int color);
-double	ft_scale_coordinate_x(t_fractol *fractol, int x);
-double	ft_scale_coordinate_y(t_fractol *fractol, int y);
-void	ft_draw_fractal_pixel(t_fractol *fractol, int x, int y);
+double	calc_coordinate_x(t_fractol *fractol, int x);
+double	calc_coordinate_y(t_fractol *fractol, int y);
+void	set_fractol(t_fractol *fractol, int x, int y);
 
 // Rendring and fractal sets
-int		ft_render_fractal(t_fractol *fractol);
-int		ft_iterate_fractal(t_complex z, t_complex c, int max_iterations);
-int		ft_calculate_mandelbrot(t_fractol *fractol, int max_iterations);
-int		ft_calculate_julia(t_fractol *fractol, int max_iterations);
+int		ft_fractol(t_fractol *fractol);
+int		calc_iteration(t_complex z, t_complex c, int max_it);
+int		calc_mandelbrot(t_fractol *fractol, int max_it);
+int		calc_julia(t_fractol *fractol, int max_it);
 
 // Events
-void	ft_setup_hooks(t_fractol *fractol);
-int		ft_handle_keypress(int key, t_fractol *fractol);
-int		ft_handle_mouse(int button, int x, int y, t_fractol *fractol);
+void	set_hooks(t_fractol *fractol);
+int		esc_key_press(int key, t_fractol *fractol);
+int		mouse_scroll(int scroll, int x, int y, t_fractol *fractol);
 
 // libft
 void	ft_putstr_fd(char *s, int fd);
