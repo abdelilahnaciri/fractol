@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/08 20:39:12 by abnaciri          #+#    #+#             */
+/*   Updated: 2024/06/08 20:50:36 by abnaciri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
-
-
 
 void	ft_putstr_fd(char *s, int fd)
 {
@@ -13,9 +23,9 @@ void	ft_putstr_fd(char *s, int fd)
 
 int	ft_atoi(const char *s)
 {
-	int     nb;
-	int		sign;
-	int		i;
+	int	nb;
+	int	sign;
+	int	i;
 
 	sign = 1;
 	nb = 0;
@@ -37,20 +47,20 @@ int	ft_atoi(const char *s)
 	return (nb * sign);
 }
 
-double	ft_process_fractional_part(const char *str)
+double	ft_fractional_part(const char *str)
 {
-	double	fractional_part;
-	int		divisor_for_fraction;
+	double	fractional;
+	int		divisor;
 
-	fractional_part = 0.0;
-	divisor_for_fraction = 1;
+	fractional = 0.0;
+	divisor = 1;
 	while (*str != '\0')
 	{
-		fractional_part = fractional_part * 10 + (*str - '0');
-		divisor_for_fraction *= 10;
+		fractional = fractional * 10 + (*str - '0');
+		divisor *= 10;
 		str++;
 	}
-	return (fractional_part / divisor_for_fraction);
+	return (fractional / divisor);
 }
 
 double	ft_atof(const char *str)
@@ -72,7 +82,7 @@ double	ft_atof(const char *str)
 	if (*str == '.')
 	{
 		str++;
-		fractional_part = ft_process_fractional_part(str);
+		fractional_part = ft_fractional_part(str);
 	}
 	return (sign * (integer_part + fractional_part));
 }

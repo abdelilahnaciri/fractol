@@ -1,14 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/08 20:39:01 by abnaciri          #+#    #+#             */
+/*   Updated: 2024/06/08 20:58:53 by abnaciri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <string.h>
-# include <math.h>
 # include <mlx.h>
-# include <limits.h>
-# include <stdbool.h>
 
 // Window
 # define WIDTH 800
@@ -36,15 +43,8 @@ typedef struct s_image
 	int		endian;
 }	t_image;
 
-typedef struct s_point
-{
-	int	x;
-	int	y;
-}	t_point;
-
 typedef struct s_julia_args
 {
-	char	type;
 	double	julia_x;
 	double	julia_y;
 }	t_julia_args;
@@ -52,23 +52,20 @@ typedef struct s_julia_args
 typedef struct s_fractol
 {
 	// Window and image info
-	void				*mlx_con;
-	void				*mlx_win;
-	char 				*title;
-	t_image image;
+	void			*mlx_con;
+	void			*mlx_win;
+	char			*title;
+	t_image			image;
 	// complex numbers
-	t_complex			c;
-	t_complex			pixel;
+	t_complex		c;
+	t_complex		pixel;
 	// Fractal specific parameters
-	int					max_it;
-	double				zoom;
-	t_point				offset;
+	int				max_it;
+	double			zoom;
 	t_julia_args	julia_args;
 }	t_fractol;
 
-
 // Graphics
-// void	ft_setup_window(t_fractol *fractol);
 void	ft_init_win(t_fractol *fractol);
 int		ft_close_win(t_fractol *fractol);
 
@@ -92,13 +89,11 @@ int		mouse_scroll(int scroll, int x, int y, t_fractol *fractol);
 
 // libft
 void	ft_putstr_fd(char *s, int fd);
-int		ft_atoi(const char *s);
-double	ft_process_fractional_part(const char *str);
 double	ft_atof(const char *str);
 
 // utils
-int is_number(char *str);
+int		is_number(char *str);
 void	check_inputs(char *argv[], t_fractol *fractol);
-int ft_strncmp(const char *str1, const char *str2, size_t n);
+int		ft_strncmp(const char *str1, const char *str2, size_t n);
 
 #endif
