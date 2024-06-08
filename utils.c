@@ -6,7 +6,7 @@
 /*   By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:39:24 by abnaciri          #+#    #+#             */
-/*   Updated: 2024/06/08 21:02:43 by abnaciri         ###   ########.fr       */
+/*   Updated: 2024/06/08 23:57:34 by abnaciri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,44 +38,46 @@ int	handle_max_int(char *str)
 	return (1);
 }
 
-int	check_nbr(char *str, int i, int dot)
+int	check_nbr(char *str, int i, int *p_dot)
 {
-	if (str[i] <= 32 || str[0] == '.')
-		return (0);
-	else if (str[i] >= '0' && str[i] <= '9')
+	while (str[++i])
 	{
-		if (!(str[i + 1] >= '0' && str[i + 1] <= '9')
-			&& str[i + 1] != '\0' && str[i + 1] != '.')
+		if (str[i] <= 32 || str[0] == '.')
+			return (0);
+		else if (str[i] >= '0' && str[i] <= '9')
+		{
+			if (!(str[i + 1] >= '0' && str[i + 1] <= '9')
+				&& str[i + 1] != '\0' && str[i + 1] != '.')
+				return (0);
+		}
+		else if (str[i] == '+' || str[i] == '-')
+		{
+			if (!(str[i + 1] >= '0' && str[i + 1] <= '9'))
+				return (0);
+		}
+		else if (str[i] == '.')
+		{
+			*p_dot += 1;
+			if (!(str[i + 1] >= '0' && str[i + 1] <= '9') || str[i + 1] == '\0')
+				return (0);
+		}
+		else
 			return (0);
 	}
-	else if (str[i] == '+' || str[i] == '-')
-	{
-		if (!(str[i + 1] >= '0' && str[i + 1] <= '9'))
-			return (0);
-	}
-	else if (str[i] == '.')
-	{
-		dot++;
-		if (!(str[i + 1] >= '0' && str[i + 1] <= '9') || str[i + 1] == '\0')
-			return (0);
-	}
-	else
-		return (0);
+	return (1);
 }
 
 int	is_number(char *str)
 {
 	int	i;
 	int	dot;
+	int	*p_dot;
 
-	i = 0;
+	i = -1;
 	dot = 0;
-	while (str[i])
-	{
-		if (!check_nbr(str, i, dot))
-			return (0);
-		i++;
-	}
+	p_dot = &dot;
+	if (!check_nbr(str, i, p_dot))
+		return (0);
 	if (dot > 1 || !handle_max_int(str))
 		return (0);
 	return (1);
