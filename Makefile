@@ -6,7 +6,7 @@
 #    By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/08 20:39:20 by abnaciri          #+#    #+#              #
-#    Updated: 2024/06/08 20:39:21 by abnaciri         ###   ########.fr        #
+#    Updated: 2024/06/08 22:11:14 by abnaciri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,7 @@ SRC = coloring.c \
 	fractol_maths.c \
 	libft.c \
 	ft_strncmp.c \
-	utils.c \
-	utils2.c
+	utils.c 
 
 OBJ = $(SRC:.c=.o)
 all : $(NAME)
