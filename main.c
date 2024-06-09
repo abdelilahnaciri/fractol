@@ -6,7 +6,7 @@
 /*   By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:39:15 by abnaciri          #+#    #+#             */
-/*   Updated: 2024/06/08 20:53:34 by abnaciri         ###   ########.fr       */
+/*   Updated: 2024/06/09 13:42:32 by abnaciri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void	error_msg(void)
 {
 	ft_putstr_fd("Enter \"Mandelbrot\", or \"Julia\" + Cordinates\n", 2);
-	exit(0);
+	exit(1);
 }
 
 int	ft_close_win(t_fractol *fractol)
 {
 	mlx_destroy_image(fractol->mlx_con, fractol->image.img_ptr);
 	mlx_destroy_window(fractol->mlx_con, fractol->mlx_win);
-	exit(1);
+	exit(0);
 }
 
 void	ft_init_win(t_fractol *fractol)

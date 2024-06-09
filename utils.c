@@ -6,7 +6,7 @@
 /*   By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:39:24 by abnaciri          #+#    #+#             */
-/*   Updated: 2024/06/08 23:57:34 by abnaciri         ###   ########.fr       */
+/*   Updated: 2024/06/09 13:42:51 by abnaciri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,12 @@ void	check_inputs(char *argv[], t_fractol *fractol)
 				|| fractol->julia_args.julia_y > 2))
 		{
 			ft_putstr_fd("Cordinates should be btween -2 and 2\n", 2);
-			exit(0);
+			exit(1);
 		}
 	}
 	else
 	{
 		ft_putstr_fd("Error: Invalid parameters for Julia.\n", 2);
-		exit(0);
+		exit(1);
 	}
 }
