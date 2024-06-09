@@ -6,17 +6,16 @@
 #    By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/08 20:39:20 by abnaciri          #+#    #+#              #
-#    Updated: 2024/06/08 22:11:14 by abnaciri         ###   ########.fr        #
+#    Updated: 2024/06/09 15:13:53 by abnaciri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 HEADER = fractol.h
 CFLAGS = -Wall -Wextra -Werror
-LDLIBS = -lmlx -framework OpenGL -framework AppKit
+MLXLIB = -lmlx -framework OpenGL -framework AppKit
 CC = cc
 RM = rm -f
-AR = ar crs
 SRC = coloring.c \
 	drawing.c \
 	hooks.c \
@@ -29,7 +28,7 @@ SRC = coloring.c \
 OBJ = $(SRC:.c=.o)
 all : $(NAME)
 $(NAME) : $(OBJ)
-	$(CC) $(LDLIBS) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(MLXLIB) $(CFLAGS) $(OBJ) -o $(NAME)
 %.o : %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 

@@ -6,7 +6,7 @@
 /*   By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:38:46 by abnaciri          #+#    #+#             */
-/*   Updated: 2024/06/08 20:42:07 by abnaciri         ###   ########.fr       */
+/*   Updated: 2024/06/09 15:03:40 by abnaciri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ int	ft_fractol(t_fractol *fractol)
 	int	y;
 
 	y = 0;
-	while (y < WIDTH)
+	while (y < HEIGHT)
 	{
 		x = 0;
-		while (x < HEIGHT)
+		while (x < WIDTH)
 		{
 			set_fractol(fractol, x, y);
 			x++;
