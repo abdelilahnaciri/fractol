@@ -6,7 +6,7 @@
 #    By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/08 20:39:20 by abnaciri          #+#    #+#              #
-#    Updated: 2024/06/09 15:13:53 by abnaciri         ###   ########.fr        #
+#    Updated: 2024/06/09 15:48:57 by abnaciri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ RM = rm -f
 SRC = coloring.c \
 	drawing.c \
 	hooks.c \
-	main.c \
+	fractol.c \
 	fractol_maths.c \
-	libft.c \
+	utils2.c \
 	ft_strncmp.c \
 	utils.c 
 
