@@ -6,7 +6,7 @@
 /*   By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:39:01 by abnaciri          #+#    #+#             */
-/*   Updated: 2024/06/08 23:55:53 by abnaciri         ###   ########.fr       */
+/*   Updated: 2024/06/09 15:53:23 by abnaciri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,10 @@
 # include <unistd.h>
 # include <mlx.h>
 
-// Window
 # define WIDTH 800
 # define HEIGHT 800
 
-// keys
 # define KEY_ESC 53
-
-// Mouse
 # define SCROLL_IN_KEY 4
 # define SCROLL_OUT_KEY 5
 
@@ -51,47 +47,37 @@ typedef struct s_julia_args
 
 typedef struct s_fractol
 {
-	// Window and image info
 	void			*mlx_con;
 	void			*mlx_win;
 	char			*title;
 	t_image			image;
-	// complex numbers
 	t_complex		c;
 	t_complex		pixel;
-	// Fractal specific parameters
 	int				max_it;
 	double			zoom;
 	t_julia_args	julia_args;
 }	t_fractol;
 
-// Graphics
 void	ft_init_win(t_fractol *fractol);
 int		ft_close_win(t_fractol *fractol);
 
-// Coloring and Drawing
 int		set_color(int iterations, int max_it);
 void	ft_put_pixel_to_image(t_fractol *fractol, int x, int y, int color);
 double	calc_coordinate_x(t_fractol *fractol, int x);
 double	calc_coordinate_y(t_fractol *fractol, int y);
 void	set_fractol(t_fractol *fractol, int x, int y);
 
-// Rendring and fractal sets
 int		ft_fractol(t_fractol *fractol);
 int		calc_iteration(t_complex z, t_complex c, int max_it);
 int		calc_mandelbrot(t_fractol *fractol, int max_it);
 int		calc_julia(t_fractol *fractol, int max_it);
 
-// Events
 void	set_hooks(t_fractol *fractol);
 int		esc_key_press(int key, t_fractol *fractol);
 int		mouse_scroll(int scroll, int x, int y, t_fractol *fractol);
 
-// libft
 void	ft_putstr_fd(char *s, int fd);
 double	ft_atof(const char *str);
-
-// utils
 int		is_number(char *str);
 void	check_inputs(char *argv[], t_fractol *fractol);
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
