@@ -6,7 +6,7 @@
 /*   By: abnaciri <abnaciri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:39:15 by abnaciri          #+#    #+#             */
-/*   Updated: 2024/06/09 13:42:32 by abnaciri         ###   ########.fr       */
+/*   Updated: 2024/06/09 15:38:22 by abnaciri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	ft_init_win(t_fractol *fractol)
 	fractol->mlx_con = mlx_init();
 	if (!fractol->mlx_con)
 		exit(1);
-	fractol->mlx_win = mlx_new_window(fractol->mlx_con, HEIGHT,
-			WIDTH, fractol->title);
+	fractol->mlx_win = mlx_new_window(fractol->mlx_con, WIDTH,
+			HEIGHT, fractol->title);
 	if (!fractol->mlx_win)
 		exit(1);
-	fractol->image.img_ptr = mlx_new_image(&fractol->image, HEIGHT, WIDTH);
+	fractol->image.img_ptr = mlx_new_image(&fractol->image, WIDTH, HEIGHT);
 	if (!fractol->image.img_ptr)
 	{
 		mlx_destroy_window(fractol->mlx_con, fractol->mlx_win);
@@ -68,6 +68,5 @@ int	main(int ac, char *av[])
 	ft_init_win(&fractol);
 	set_hooks(&fractol);
 	mlx_loop(fractol.mlx_con);
-	ft_close_win(&fractol);
 	return (0);
 }
